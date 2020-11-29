@@ -1,28 +1,41 @@
 ﻿#include <iostream>
-#include <Windows.h>
 #include <thread>
-#include "Component.h"
-#include "TimeHandler.h"
+
+#include "Time/Clock.h"
+
+/* Components we will be using */
+#include "Component/Button/Button.h"
+#include "Component/LED/LED.h"
+
+static bool StartUp() {
+	/* Setup GPIO here... */
+	return true;
+}
 
 int main() {
+	/* Initializes everything needed at startup */
+	if (!StartUp()) return 93;
+
 	/* Main clock */
 	TimeSystem::Clock cl({ 0,0,5 });
 
 	/* Time points */
 	TimeSystem::TimePoint p1(0, 0, 10);
 	TimeSystem::TimePoint p2(0, 0, 15);
+
 	/* Components */
 	ComponentSystem::Button sensor("Sensor", 1);
-	ComponentSystem::LightLED led("Light", 2);
-	/* Logic loop in a new thread */
-	std::thread clock([&]() {
-		while (true) {
-			cl.Update();
-			sensor.Update();
-			led.Logic((cl > p1 && cl < p2) || sensor.GetState());
-			//std::cout << led.GetBool() << "\n";
-			Sleep(1);
+	ComponentSystem::LED led("Light", 2);
+
+	/* Logic loop */
+	while (true) {
+		sensor.Update();
+		led.Logic(cl > p1 && cl < p2 || sensor.GetState());
+
+		if (cl.Update()) {
+			std::cout << cl << "\n";
+			std::cout << "Led: " << std::boolalpha << (led.GetBool() ? "On" : "Off") << "\n";
 		}
-		});
-	clock.join();
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+	}
 }
