@@ -4,6 +4,7 @@
 
 #pragma once
 #include <iostream>
+
 namespace TimeSystem {
 
 	class TimePoint {
@@ -13,7 +14,10 @@ namespace TimeSystem {
 		/* Operator overloads used to add logic to the LED */
 		bool operator==(const TimePoint& other);
 		bool operator>(const TimePoint& other);
+		bool operator>=(const TimePoint& other);
 		bool operator<(const TimePoint& other);
+		TimePoint operator+(const TimePoint& other);
+		TimePoint operator-(const TimePoint& other);
 		friend std::ostream& operator<<(std::ostream& os, const TimePoint& other);
 	private:
 		friend class Clock;

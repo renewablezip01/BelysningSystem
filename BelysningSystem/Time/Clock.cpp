@@ -3,7 +3,7 @@
 
 namespace TimeSystem {
 	/* Our Clock constructor */
-	Clock::Clock(const TimePoint& startTime) : startUpTime(startTime)
+	Clock::Clock(const TimePoint& startTime) : time(startTime)
 	{
 		startUpdater = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
 	}
@@ -16,23 +16,23 @@ namespace TimeSystem {
 
 
 		/* Logic of our clock */
-		if (startUpTime.m_Second > 59) {
-			startUpTime.m_Second = 0;
-			startUpTime.m_Minute = startUpTime.m_Minute + 1;
+		if (time.m_Second > 59) {
+			time.m_Second = 0;
+			time.m_Minute = time.m_Minute + 1;
 
-			if (startUpTime.m_Minute > 60) {
-				startUpTime.m_Minute = 0;
-				startUpTime.m_Hour = startUpTime.m_Hour + 1;
+			if (time.m_Minute > 60) {
+				time.m_Minute = 0;
+				time.m_Hour = time.m_Hour + 1;
 
-				if (startUpTime.m_Hour > 24) {
-					startUpTime.m_Hour = 0;
+				if (time.m_Hour > 24) {
+					time.m_Hour = 0;
 				}
 			}
 		}
 
 		if ((nextUpdater - startUpdater).count() >= 1000) {
 			startUpdater = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
-			startUpTime.m_Second++;
+			time.m_Second++;
 			return true;
 		}
 		return false;
@@ -40,15 +40,20 @@ namespace TimeSystem {
 	/* Operator overloads to match those of TimePoint class */
 	bool Clock::operator==(const TimePoint& other)
 	{
-		return startUpTime == other;
+		return time == other;
 	}
 	bool Clock::operator>(const TimePoint& other)
 	{
-		return this->startUpTime > other;
+		return this->time > other;
+	}
+	bool Clock::operator>=(const TimePoint& other)
+	{
+		return this->time >= other;
+
 	}
 	bool Clock::operator<(const TimePoint& other)
 	{
-		return this->startUpTime < other;
+		return this->time < other;
 
 	}
 	std::ostream& operator<<(std::ostream& os, const TimePoint& other)
@@ -58,7 +63,7 @@ namespace TimeSystem {
 	}
 	std::ostream& operator<<(std::ostream& os, const Clock& cl)
 	{
-		os << cl.startUpTime;
+		os << cl.time;
 		return os;
 	}
 }

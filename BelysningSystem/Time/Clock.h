@@ -20,10 +20,11 @@ namespace TimeSystem {
 		/* Operator overloads to match those of TimePoint class */
 		bool operator==(const TimePoint& other);
 		bool operator>(const TimePoint& other);
+		bool operator>=(const TimePoint& other);
 		bool operator<(const TimePoint& other);
 		friend std::ostream& operator<<(std::ostream& os, const Clock& cl);
+		TimePoint time;
 	private:
-		TimePoint startUpTime;
 		std::chrono::milliseconds startUpdater, nextUpdater;
 	};
 }
