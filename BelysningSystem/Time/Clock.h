@@ -22,8 +22,11 @@ namespace TimeSystem {
 		bool operator>(const TimePoint& other);
 		bool operator>=(const TimePoint& other);
 		bool operator<(const TimePoint& other);
+		bool operator<=(const TimePoint& other);
 		friend std::ostream& operator<<(std::ostream& os, const Clock& cl);
+		operator std::string();
 		TimePoint time;
+
 	private:
 		std::chrono::milliseconds startUpdater, nextUpdater;
 	};

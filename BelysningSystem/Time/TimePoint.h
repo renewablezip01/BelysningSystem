@@ -11,14 +11,18 @@ namespace TimeSystem {
 	public:
 		TimePoint(int32_t hour, int32_t minute, int32_t second) : m_Hour(hour), m_Minute(minute), m_Second(second) { }
 	public:
+		int32_t ToSeconds();
+	public:
 		/* Operator overloads used to add logic to the LED */
 		bool operator==(const TimePoint& other);
 		bool operator>(const TimePoint& other);
 		bool operator>=(const TimePoint& other);
 		bool operator<(const TimePoint& other);
+		bool operator<=(const TimePoint& other);
 		TimePoint operator+(const TimePoint& other);
 		TimePoint operator-(const TimePoint& other);
 		friend std::ostream& operator<<(std::ostream& os, const TimePoint& other);
+		operator std::string();
 	private:
 		friend class Clock;
 		int32_t m_Hour, m_Minute, m_Second;

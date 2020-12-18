@@ -31,4 +31,10 @@ namespace ComponentSystem {
 		return this->m_State;
 	}
 
+	//BlinkingLED::BlinkingLED(const std::string& name, int32_t id)
+	//{
+	//	this->m_Name = name;
+	//	this->m_Id = id;
+	//}
+
 }

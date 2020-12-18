@@ -14,7 +14,7 @@ namespace ComponentSystem {
 	void Button::Update()
 	{
 		/* TEMPORARY. USING KEYBOARD AS A BUTTON INSTEAD OF PHYSICAL BUTTON THIS IS ONLY FOR TESTING */
-		m_State = GetAsyncKeyState(VK_END) ? true : false;
+		m_State = GetAsyncKeyState(this->m_Id) ? true : false;
 	}
 
 	/* Returns the current state of the bool */

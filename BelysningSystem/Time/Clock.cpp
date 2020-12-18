@@ -16,15 +16,15 @@ namespace TimeSystem {
 
 
 		/* Logic of our clock */
-		if (time.m_Second > 59) {
+		if (time.m_Second >= 59) {
 			time.m_Second = 0;
 			time.m_Minute = time.m_Minute + 1;
 
-			if (time.m_Minute > 60) {
+			if (time.m_Minute >= 60) {
 				time.m_Minute = 0;
 				time.m_Hour = time.m_Hour + 1;
 
-				if (time.m_Hour > 24) {
+				if (time.m_Hour >= 24) {
 					time.m_Hour = 0;
 				}
 			}
@@ -56,14 +56,18 @@ namespace TimeSystem {
 		return this->time < other;
 
 	}
-	std::ostream& operator<<(std::ostream& os, const TimePoint& other)
+	bool Clock::operator<=(const TimePoint& other)
 	{
-		os << other.m_Hour << ":" << other.m_Minute << ":" << other.m_Second;
-		return os;
+		return this->time <= other;
+
 	}
 	std::ostream& operator<<(std::ostream& os, const Clock& cl)
 	{
 		os << cl.time;
 		return os;
 	}
+	Clock::operator std::string() {
+		return this->time;
+	}
+
 }

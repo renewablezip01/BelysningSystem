@@ -23,7 +23,7 @@ namespace ComponentSystem {
 		/* Returns the current state of the LED */
 		const bool& GetBool() const;
 
-	private:
+	protected:
 		bool m_State = false;
 	};
 }

@@ -24,7 +24,9 @@ namespace ComponentSystem {
 		Component() = default;
 
 	protected:
+		/* Name is used to print out our components name if needed */
 		std::string m_Name = "Undefined";
+		/* Id is used for wiringPi Pins but currently being used as getasynckey keys to debug our application. */
 		int32_t m_Id = NULL;
 	};
 }
