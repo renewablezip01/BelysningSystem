@@ -40,15 +40,15 @@ int main() {
 	// Buttons
 	ComponentSystem::Button b_Stralkastare("Knapp Strålkastare", VK_F1);
 	ComponentSystem::Button b_Porten("Knapp Porten", VK_F2);
-	ComponentSystem::Button b_BakomHuset("Knapp Bakom Garagen", VK_F3);
-	ComponentSystem::Button b_BakomHusetSensor("Sensor Bakom Garagen", VK_F4);
+	ComponentSystem::Button b_BakomHuset("Knapp Bakom Huset", VK_F3);
+	ComponentSystem::Button b_BakomHusetSensor("Sensor Bakom Huset", VK_F4);
 	ComponentSystem::Button b_Ringklocka("Ringklocka", VK_F5);
 
 
 	// LEDS
 	ComponentSystem::LED l_Stralkastare("Strålkastare", 2);
 	ComponentSystem::LED l_InneIGaragen("Inne i garagen", 3);
-	ComponentSystem::LED l_BakomHuset("Bakom garagen", 3);
+	ComponentSystem::LED l_BakomHuset("Bakom Huset", 3);
 
 	ComponentSystem::LED l_BlinkingLED("Blinking LED", 3);
 
@@ -89,11 +89,10 @@ int main() {
 			SetConsoleTextAttribute(hConsole, 15);
 			/* ~ Clock ends here. */
 			
-			std::cout << l_Stralkastare.GetName() << (l_Stralkastare.GetBool() ? " On" : " Off") << " " << ((stralkastare) >= 0 ? ((bestamdTime > 0) ? bestamdTime : stralkastare) : bestamdTime)  << " | ";
-			std::cout << l_InneIGaragen.GetName() << (l_InneIGaragen.GetBool() ? " On" : " Off") << " | ";
-			std::cout << l_BlinkingLED.GetName() << (l_BlinkingLED.GetBool() ? " On " : " Off") << " " << blinking << " | ";
-			std::cout << l_BakomHuset.GetName() << (l_BakomHuset.GetBool() ? " On" : " Off") << " " << ((bakomHusetTime <= 0 && bakomHusetPress > 0) ? bakomHusetPress : ((bestamdTime > 0) ? bestamdTime : bakomHusetTime)) << " | ";
-
+			std::cout << l_Stralkastare.GetName() << (l_Stralkastare.GetBool() ? " On " : " Off") << " (F1) " << " " << ((stralkastare) >= 0 ? ((bestamdTime > 0) ? bestamdTime : stralkastare) : bestamdTime)  << " | ";
+			std::cout << l_InneIGaragen.GetName() << (l_InneIGaragen.GetBool() ? " On " : " Off") << " (F2) " << " | ";
+			std::cout << l_BakomHuset.GetName() << (l_BakomHuset.GetBool() ? " On" : " Off") << " (F3 | F4) " << " " << ((bakomHusetTime <= 0 && bakomHusetPress > 0) ? bakomHusetPress : ((bestamdTime > 0) ? bestamdTime : bakomHusetTime)) << " | ";
+			std::cout << l_BlinkingLED.GetName() << (l_BlinkingLED.GetBool() ? " On " : " Off") << " (F5) " << " " << blinking << " | ";
 			std::cout << "\r";
 		}
 
